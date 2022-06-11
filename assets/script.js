@@ -1,12 +1,13 @@
 var buttonEl = document.getElementById('start');
+var elementsInsideBox = document.querySelector('.box-elements')
 
-console.log(buttonEl);
 
 var listQA = [];
 
 function startQuiz(event) {
     event.preventDefault();
-    alert("hello!");
+    // console.log(elementsInsideBox.children);
+    // elementsInsideBox.remove();
 }
 
 

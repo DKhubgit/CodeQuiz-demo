@@ -20,11 +20,10 @@ div {
 
 /* Highscore button to view the scores */
 #high-score {
-    position: fixed;
+    text-align: center;
     font-weight: bold;
     font-size: 25px;
-    left: 75px; 
-    top: 75px;
+    margin: 40px;
     color: var(--contrast);
 }
 
@@ -35,8 +34,10 @@ h2, h3 {
 }
 
 ul {
-    position: relative;
-    margin-left: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 button {
@@ -61,10 +62,9 @@ button:hover {
 }
 
 .box-start {
-    width: 50%;
-    height: 100%;
-    margin-left: 460px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     border-style: solid;
 }
-
 
