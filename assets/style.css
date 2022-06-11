@@ -55,4 +55,9 @@ button:hover {
     cursor: pointer;
 }
 
+.box-note {
+    display: flex;
+    justify-content: center;
+}
+
 
