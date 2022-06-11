@@ -14,11 +14,6 @@ h1 {
     color: var(--contrast);
 }
 
-h2 {
-    text-align: center;
-    color: var(--contrast);
-}
-
 div {
     position: relative;
 }
@@ -33,7 +28,17 @@ div {
     color: var(--contrast);
 }
 
-/* The start button CSS */
+/* The start button box CSS */
+h2, h3 {
+    text-align: center;
+    color: var(--contrast);
+}
+
+ul {
+    position: relative;
+    margin-left: 300px;
+}
+
 button {
     background-color: red;
     color: white;
@@ -55,9 +60,11 @@ button:hover {
     cursor: pointer;
 }
 
-.box-note {
-    display: flex;
-    justify-content: center;
+.box-start {
+    width: 50%;
+    height: 100%;
+    margin-left: 460px;
+    border-style: solid;
 }
 
 
