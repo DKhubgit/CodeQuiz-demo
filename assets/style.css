@@ -1,0 +1,58 @@
+:root {
+    --primary: #f1faee;
+    --contrast: #1d3557;
+}
+
+body {
+    background-color: var(--primary);
+}
+
+h1 {
+    text-align: center;
+    text-decoration: underline;
+    font-size: 75px;
+    color: var(--contrast);
+}
+
+h2 {
+    text-align: center;
+    color: var(--contrast);
+}
+
+div {
+    position: relative;
+}
+
+/* Highscore button to view the scores */
+#high-score {
+    position: fixed;
+    font-weight: bold;
+    font-size: 25px;
+    left: 75px; 
+    top: 75px;
+    color: var(--contrast);
+}
+
+/* The start button CSS */
+button {
+    background-color: red;
+    color: white;
+    font-size: 50px;
+    height: 100px;
+    width: 200px;
+    border-radius: 10px;
+}
+
+.box-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+}
+
+button:hover {
+    background-color: rgb(236, 74, 74);
+    cursor: pointer;
+}
+
+
