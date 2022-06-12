@@ -2,13 +2,6 @@ var buttonEl = document.getElementById('start');
 var elementsInsideBox = document.querySelector('.box-elements')
 var boxElements = document.querySelector('.box-start');
 
-// var q1 = {question: "1. Which of following is not a CSS property?",
-//     a1: "background-color",
-//     a2: "color",
-//     a3: "font-weight",
-//     a4: "text"
-// }
-
 var listQA = [{question: "1. Which of following is NOT a CSS property?",
 a1: "A. Background-color",
 a2: "B. Color",
@@ -49,14 +42,18 @@ var correctAnswers = ['D. Text', 'A. @media', "A. > ", "B. False ", "C. refreshe
 //these are declared outside of the block so that it's accessible in different functions
 var answerBox;
 var questionBox;
-var answerList;
 var placeBox;
 var timerBox;
+var answerList;
+
 var timeCount = 60;
 var userChoices;
+
 var track = 0;
+
 var timeLeft;
 var btnInfo;
+
 var elements;
 var elements1;
 var elements2;
@@ -64,6 +61,7 @@ var elements3;
 var elements4;
 
 var wrongCount = 0;
+var timeOut = 0;
 
 
 //initializes the layout of the quiz
@@ -106,12 +104,9 @@ function initQuiz(event) {
         }
         timeLeft.textContent = 'Time Left: ' + timeCount + "sec";
         
-
-        if (timeCount <= 0) {
+        //if the timer hits 0 or the user answers all questions, stop the time. 
+        if (timeCount <= 0 || timeOut != 0) {
             clearInterval(setTime);
-
-            //make sure we go to the score page after it timer hits 0
-
         }
 
     }, 1000)
@@ -146,7 +141,6 @@ function initQuiz(event) {
     placeBox.append(elements4);
     
     btnInfo = placeBox.children;
-    console.log(btnInfo);
 
     playQuestions();
 
@@ -176,8 +170,11 @@ function playQuestions() {
                     wrongCount++;
                 } 
             //once a button has been click, it will display the next question
-            console.log(track)
                 ++track;
+                if (track === 5) {
+                    ++timeOut;
+                    displayScore();
+                }
                 displayQuestion();
         });
     }
@@ -202,6 +199,38 @@ function displayQuestion() {
 function checkAnswer(clickedEl) {
     var text = clickedEl.textContent;
     return text;
+}
+
+function displayScore() {
+    questionBox.remove();
+
+    questionBox = document.createElement('div');
+    questionBox.className = 'mid-box'
+    boxElements.append(questionBox);
+
+    var endMessage = document.createElement('h2');
+    endMessage.textContent = 'Finish! Save your score!'
+    questionBox.append(endMessage);
+
+    var formEl = document.createElement('form');
+    var formLabel = document.createElement('label');
+    var formInput = document.createElement('input');
+    var formButton = document.createElement('button');
+
+    questionBox.append(formEl);
+
+    formLabel.setAttribute('for', 'User-Initials');
+    formLabel.textContent = 'Your Initials: '
+    questionBox.append(formLabel);
+
+    formInput.setAttribute('type', "text");
+    formInput.setAttribute('id', "user");
+    questionBox.append(formInput);
+
+    formButton.setAttribute('id', 'save-score');
+    formButton.textContent = "SAVE";
+    questionBox.append(formButton);
+    
 }
 
 
