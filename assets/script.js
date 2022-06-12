@@ -76,21 +76,25 @@ function playQuestions() {
     elements.textContent = dataObject.question;
     questionBox.append(elements);
 
+    var placeBox = document.createElement('div');
+    placeBox.className = 'choice-box';
+    questionBox.append(placeBox);
+
     var elements1 = document.createElement('button')
     elements1.textContent = "A. " + dataObject.a1;
-    questionBox.append(elements1);
+    placeBox.append(elements1);
 
     var elements2 = document.createElement('button')
     elements2.textContent = "B. " + dataObject.a2;
-    questionBox.append(elements2);
+    placeBox.append(elements2);
 
     var elements3 = document.createElement('button')
     elements3.textContent = "C. " + dataObject.a3;
-    questionBox.append(elements3);
+    placeBox.append(elements3);
 
     var elements4 = document.createElement('button')
     elements4.textContent = "D. " + dataObject.a4;
-    questionBox.append(elements4);
+    placeBox.append(elements4);
 
     return;
 }
