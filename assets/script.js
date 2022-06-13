@@ -150,6 +150,8 @@ function initQuestion () {
     //stores the answer buttons to a variable
     btnInfo = placeBox.children;
 
+    return;
+
 }
 
 // displays each questions and choices
@@ -174,13 +176,14 @@ function playQuestions() {
                 //it will then be checked on the timer interval in initQuiz.
                 wrongCount++;
             } 
-            //once a button has been click, it will display the next question
+            //once a button has been clicked, it will display the next question
             //this checks whether all questions have been answered
             ++track;
             if (track === listQA.length) {
                 ++timeOut;
             } else {
                 displayQuestion();
+                return;
             }
         });
     }
@@ -213,7 +216,6 @@ function displayScore() {
     points.textContent = "New Score: " + userPoints + "/25";
     answerBox.append(points);
 
-
     questionBox.remove();
 
     questionBox = document.createElement('div');
@@ -242,9 +244,48 @@ function displayScore() {
     formButton.setAttribute('id', 'save-score');
     formButton.textContent = "SAVE";
     questionBox.append(formButton);
-    
+
+    formButton.addEventListener('click', saveScore);    
+}
+var prevScores =[];
+function saveScore(event) {
+    event.preventDefault();
+    var userInput = document.getElementById('user');
+    console.log(userInput.value);
+
+    if (userInput.value == '' || userInput.value.includes(' ')) {
+        alert('Please enter your Initials with no spaces!');
+        userInput.value = '';
+        return;
+    } else {
+        var userScores = {
+            initials: userInput.value,
+            pts: userPoints,
+            time: timeCount,
+        }
+        prevScores = JSON.parse(localStorage.getItem('ScoreList'))
+        if (prevScores == null) {
+            prevScores = [userScores];
+            localStorage.setItem('ScoreList', JSON.stringify(prevScores));
+        } else {
+            console.log(prevScores);
+            localStorage.removeItem('ScoreList');
+            prevScores.push(userScores);
+            prevScores.sort(function(a,b){return a.pts - b.pts });
+            localStorage.setItem('ScoreList', JSON.stringify(prevScores));
+        }
+    }
+
+    userInput.value = '';
+    alert('Score saved');
+
+    displayHighScore();
 }
 
+function displayHighScore() {
+    alert("now display the high scorelist!");
+
+}
 
 
 buttonEl.addEventListener('click', initQuiz);
