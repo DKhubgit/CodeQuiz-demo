@@ -148,6 +148,13 @@ button:hover {
 
 }
 
+.score-list {
+    color: var(--secondary-contrast);
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
 
 /* Responsive layout CSS */
 

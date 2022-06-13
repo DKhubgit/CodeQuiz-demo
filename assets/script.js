@@ -208,6 +208,7 @@ function checkAnswer(clickedEl) {
     var text = clickedEl.textContent;
     return text;
 }
+
 //appends a new box with form elements for saving score
 function displayScore() {
 
@@ -246,7 +247,10 @@ function displayScore() {
     questionBox.append(formButton);
 
     formButton.addEventListener('click', saveScore);    
+
+    return;
 }
+
 var prevScores =[];
 function saveScore(event) {
     event.preventDefault();
@@ -283,7 +287,32 @@ function saveScore(event) {
 }
 
 function displayHighScore() {
-    alert("now display the high scorelist!");
+    questionBox.remove()
+
+    questionBox = document.createElement('div');
+    questionBox.className = 'mid-box'
+    boxElements.append(questionBox);
+
+    var title = document.createElement('h2');
+    title.textContent = "High Scores"
+    questionBox.append(title);
+
+    var list = document.createElement('ol');
+    list.setAttribute('class', 'score-list');
+    questionBox.append(list);
+
+    var listEl;
+    prevScores = JSON.parse(localStorage.getItem('ScoreList'))
+    for (var i = 0; i < prevScores.length; ++i) {
+        listEl = document.createElement('li');
+        var name = prevScores[i].initials;
+        var points = prevScores[i].pts;
+        var time = prevScores[i].time;
+        listEl.textContent = name + ' ' + points + '/25 ' + time + 'sec';
+        list.append(listEl);
+    }
+
+    return;
 
 }
 
