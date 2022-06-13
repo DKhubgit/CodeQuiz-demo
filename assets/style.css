@@ -136,11 +136,16 @@ button:hover {
     font-size: 25px;
 }
 
+#user-points {
+    color: var(--secondary-contrast);
+    font-size: 30px;
+}
+
 #save-score {
     width: 85px;
     height: 45px;
     text-align: center;
-    
+
 }
 
 

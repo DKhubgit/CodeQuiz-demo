@@ -154,6 +154,7 @@ function initQuestion () {
 
 // displays each questions and choices
 var userChoices;
+var userPoints = 25;
 function playQuestions() {
 // adds an event listener to all the answer button
     for (i of btnInfo) {
@@ -168,6 +169,7 @@ function playQuestions() {
                 answerList = document.createElement('p')
                 answerList.textContent = (track+1) + '. Wrong!';
                 answerBox.append(answerList);
+                userPoints = userPoints - 5;
                 //everytime the user gets a wrong answer, increase this count
                 //it will then be checked on the timer interval in initQuiz.
                 wrongCount++;
@@ -177,7 +179,6 @@ function playQuestions() {
             ++track;
             if (track === listQA.length) {
                 ++timeOut;
-                displayScore();
             } else {
                 displayQuestion();
             }
@@ -206,6 +207,13 @@ function checkAnswer(clickedEl) {
 }
 //appends a new box with form elements for saving score
 function displayScore() {
+
+    var points = document.createElement('p');
+    points.setAttribute('id', 'user-points');
+    points.textContent = "New Score: " + userPoints + "/25";
+    answerBox.append(points);
+
+
     questionBox.remove();
 
     questionBox = document.createElement('div');
