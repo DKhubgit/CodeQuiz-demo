@@ -47,23 +47,13 @@ var timerBox;
 var answerList;
 
 var timeCount = 60;
-var userChoices;
 
 var track = 0;
-
-var timeLeft;
-var btnInfo;
-
-var elements;
-var elements1;
-var elements2;
-var elements3;
-var elements4;
 
 var wrongCount = 0;
 var timeOut = 0;
 
-
+var timeLeft;
 //initializes the layout of the quiz
 function initQuiz(event) {
     event.preventDefault();
@@ -107,6 +97,7 @@ function initQuiz(event) {
         //if the timer hits 0 or the user answers all questions, stop the time. 
         if (timeCount <= 0 || timeOut != 0) {
             clearInterval(setTime);
+            displayScore();
         }
 
     }, 1000)
@@ -118,6 +109,13 @@ function initQuiz(event) {
 
     return;
 }
+
+var elements;
+var elements1;
+var elements2;
+var elements3;
+var elements4;
+var btnInfo;
 
 function initQuestion () {
 
@@ -154,44 +152,42 @@ function initQuestion () {
 
 }
 
-// displays each questions and choices, should return something
-
+// displays each questions and choices
+var userChoices;
 function playQuestions() {
-
 // adds an event listener to all the answer button
-for (i of btnInfo) {
-    i.addEventListener('click', function(event) {
-        var clickedEl = event.target;
-        userChoices = checkAnswer(clickedEl);
-        if (correctAnswers.includes(userChoices)) {
-            answerList = document.createElement('p')
-            answerList.textContent = (track+1) + '. Correct!';
-            answerBox.append(answerList);
-        }  else {
-            answerList = document.createElement('p')
-            answerList.textContent = (track+1) + '. Wrong!';
-            answerBox.append(answerList);
-            //everytime the user gets a wrong answer, increase this count
-            //it will then be checked on the timer interval in initQuiz.
-            wrongCount++;
-        } 
-        //once a button has been click, it will display the next question
-        //this checks whether all questions have been answered
-        ++track;
-        if (track === listQA.length) {
-            ++timeOut;
-            displayScore();
-        } else {
-            displayQuestion();
-        }
-    });
-}
-
+    for (i of btnInfo) {
+        i.addEventListener('click', function(event) {
+            var clickedEl = event.target;
+            userChoices = checkAnswer(clickedEl);
+            if (correctAnswers.includes(userChoices)) {
+                answerList = document.createElement('p')
+                answerList.textContent = (track+1) + '. Correct!';
+                answerBox.append(answerList);
+            }  else {
+                answerList = document.createElement('p')
+                answerList.textContent = (track+1) + '. Wrong!';
+                answerBox.append(answerList);
+                //everytime the user gets a wrong answer, increase this count
+                //it will then be checked on the timer interval in initQuiz.
+                wrongCount++;
+            } 
+            //once a button has been click, it will display the next question
+            //this checks whether all questions have been answered
+            ++track;
+            if (track === listQA.length) {
+                ++timeOut;
+                displayScore();
+            } else {
+                displayQuestion();
+            }
+        });
+    }
 }
 
 
 function displayQuestion() {
-    //adds the questions and answers to the HTML document. Then gets displayed on the mid box.
+    //adds the next question and answer and displays it.
     if (track < listQA.length) {
         elements.textContent = listQA[track].question;
 
@@ -208,7 +204,7 @@ function checkAnswer(clickedEl) {
     var text = clickedEl.textContent;
     return text;
 }
-
+//appends a new box with form elements for saving score
 function displayScore() {
     questionBox.remove();
 

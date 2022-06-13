@@ -129,9 +129,19 @@ button:hover {
 
 /* The score page CSS */
 
-/* #save-score {
+#user {
+    color: var(--contrast);
+    height: 40px;
+    width: 450px;
+    font-size: 25px;
+}
+
+#save-score {
+    width: 85px;
+    height: 45px;
+    text-align: center;
     
-} */
+}
 
 
 /* Responsive layout CSS */
