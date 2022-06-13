@@ -151,8 +151,8 @@ button:hover {
 .score-list {
     color: var(--secondary-contrast);
     font-weight: bold;
-    margin-bottom: 10px;
-    font-size: 20px;
+    margin-bottom: 15px;
+    font-size: 30px;
 }
 
 

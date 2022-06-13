@@ -276,6 +276,10 @@ function saveScore(event) {
             localStorage.removeItem('ScoreList');
             prevScores.push(userScores);
             prevScores.sort(function(a,b){return a.pts - b.pts });
+            prevScores.reverse();
+            if (prevScores.length > 5) {
+                    prevScores.pop();
+            }
             localStorage.setItem('ScoreList', JSON.stringify(prevScores));
         }
     }
@@ -308,12 +312,10 @@ function displayHighScore() {
         var name = prevScores[i].initials;
         var points = prevScores[i].pts;
         var time = prevScores[i].time;
-        listEl.textContent = name + ' ' + points + '/25 ' + time + 'sec';
+        listEl.textContent = name + '  ' + points + '/25  ' + time + 'sec';
         list.append(listEl);
     }
-
     return;
-
 }
 
 
