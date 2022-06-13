@@ -203,10 +203,10 @@ function displayQuestion() {
 //appends a new box with form elements for saving score
 function displayScore() {
 
-    var points = document.createElement('p');
+    var points = document.createElement('h2');
     points.setAttribute('id', 'user-points');
     points.textContent = "New Score: " + userPoints + "/25";
-    answerBox.append(points);
+    timerBox.append(points);
 
     questionBox.remove();
 
