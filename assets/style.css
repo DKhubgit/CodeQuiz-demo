@@ -49,7 +49,7 @@ ul {
 /* The start button box CSS */
 #start {
     text-align: center;
-    background-color: red;
+    background-color: var(--secondary-contrast);
     color: white;
     font-size: 50px;
     height: 100px;
@@ -65,7 +65,7 @@ ul {
 }
 
 #start:hover {
-    background-color: rgb(236, 74, 74);
+    background-color: rgb(201, 4, 4);
     cursor: pointer;
 }
 
@@ -95,18 +95,18 @@ ul {
 
 button {
     text-align: left;
+    color: white;
     font-size: 20px;
     width: 30%;
     height: 15%;
     margin-bottom: 5px;
     border-radius: 10px;
     background-color: var(--secondary-contrast);
-    color: white;
 }
 
 button:hover {
-    background-color: rgb(168, 0, 0);
     cursor: pointer;
+    background-color: rgb(201, 4, 4);
 }
 
 .choice-box {
@@ -129,16 +129,16 @@ button:hover {
 
 /* The score page CSS */
 
-#user {
-    color: var(--contrast);
+#user-input {
     height: 40px;
     width: 450px;
     font-size: 25px;
+    color: var(--contrast);
 }
 
 #user-points {
-    color: var(--secondary-contrast);
     font-size: 30px;
+    color: var(--secondary-contrast);
 }
 
 #save-score {
@@ -149,10 +149,18 @@ button:hover {
 }
 
 .score-list {
-    color: var(--secondary-contrast);
     font-weight: bold;
     margin-bottom: 15px;
     font-size: 30px;
+    color: var(--contrast);
+}
+
+#temp-btn {
+    text-align: center;
+    width: 150px;
+    height: 45px;
+    margin-top: 30px;
+    margin-left: 30px;
 }
 
 

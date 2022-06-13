@@ -7,33 +7,30 @@ a1: "A. Background-color",
 a2: "B. Color",
 a3: "C. Font-weight",
 a4: "D. Text",
-correct: "D"
 }, 
 {question: "2. Which of the following is used to implement a responsive layout?",
 a1: "A. @media",
 a2: "B. :hover",
 a3: "C. screen",
 a4: "D. ::after",
-correct: "A"
 }, 
 {question: "3. Which of the following is a CSS Selector?",
 a1: "A. > ",
 a2: "B. ! ",
 a3: "C. & ",
 a4: "D. $ ",
-correct: "A"
 }, 
 {question: "4. If 'a = true' and 'b = false', what will '(!a || b) && (a || !b)' return?",
 a1: "A. True ",
 a2: "B. False ",
-correct: "B"
+a3: "C. Nothing ",
+a4: "D. Undefined "
 }, 
 {question: "5. What is the default behavior of the form tag?",
 a1: "A. Nothing",
 a2: "B. Sends the data to the local storage",
 a3: "C. refreshes the page",
-a4: "D. Displays an alert",
-correct: "C"
+a4: "D. Displays an alert"
 }];
 
 var correctAnswers = ['D. Text', 'A. @media', "A. > ", "B. False ", "C. refreshes the page"];
@@ -82,9 +79,9 @@ function initQuiz(event) {
     timeLeft = document.createElement('h2')
     timeLeft.textContent = 'Time Left: ' + timeCount + "sec";
     timerBox.append(timeLeft)
-    //add the time interval function to the right box
     
-    var setTime = setInterval (function () {
+    //add the time interval function to the right box
+    var setTime = setInterval(function () {
         // if the wrong count is 1 we will subtract time
         if (wrongCount != 0) {
             timeCount = timeCount - 5;
@@ -151,27 +148,26 @@ function initQuestion () {
     btnInfo = placeBox.children;
 
     return;
-
 }
 
 // displays each questions and choices
 var userChoices;
-var userPoints = 25;
+var userPoints = 0;
 function playQuestions() {
 // adds an event listener to all the answer button
     for (i of btnInfo) {
         i.addEventListener('click', function(event) {
             var clickedEl = event.target;
-            userChoices = checkAnswer(clickedEl);
+            userChoices = clickedEl.textContent;
             if (correctAnswers.includes(userChoices)) {
                 answerList = document.createElement('p')
                 answerList.textContent = (track+1) + '. Correct!';
                 answerBox.append(answerList);
+                userPoints = userPoints + 5;
             }  else {
                 answerList = document.createElement('p')
                 answerList.textContent = (track+1) + '. Wrong!';
                 answerBox.append(answerList);
-                userPoints = userPoints - 5;
                 //everytime the user gets a wrong answer, increase this count
                 //it will then be checked on the timer interval in initQuiz.
                 wrongCount++;
@@ -181,6 +177,7 @@ function playQuestions() {
             ++track;
             if (track === listQA.length) {
                 ++timeOut;
+                return;
             } else {
                 displayQuestion();
                 return;
@@ -191,10 +188,9 @@ function playQuestions() {
 
 
 function displayQuestion() {
-    //adds the next question and answer and displays it.
+    //adds the next question and answer to the box.
     if (track < listQA.length) {
         elements.textContent = listQA[track].question;
-
         elements1.textContent = listQA[track].a1;
         elements2.textContent = listQA[track].a2;
         elements3.textContent = listQA[track].a3;
@@ -202,11 +198,6 @@ function displayQuestion() {
     } else {
         return;
     }
-}
-
-function checkAnswer(clickedEl) {
-    var text = clickedEl.textContent;
-    return text;
 }
 
 //appends a new box with form elements for saving score
@@ -239,7 +230,7 @@ function displayScore() {
     questionBox.append(formLabel);
 
     formInput.setAttribute('type', "text");
-    formInput.setAttribute('id', "user");
+    formInput.setAttribute('id', "user-input");
     questionBox.append(formInput);
 
     formButton.setAttribute('id', 'save-score');
@@ -252,11 +243,13 @@ function displayScore() {
 }
 
 var prevScores =[];
+//takes the user's input and store it in localstorage
 function saveScore(event) {
     event.preventDefault();
-    var userInput = document.getElementById('user');
+    var userInput = document.getElementById('user-input');
+    //checks to see if user inputed nothing and alerts the user,
+    //otherwise save user's info to local storage.
     console.log(userInput.value);
-
     if (userInput.value == '' || userInput.value.includes(' ')) {
         alert('Please enter your Initials with no spaces!');
         userInput.value = '';
@@ -272,8 +265,6 @@ function saveScore(event) {
             prevScores = [userScores];
             localStorage.setItem('ScoreList', JSON.stringify(prevScores));
         } else {
-            console.log(prevScores);
-            localStorage.removeItem('ScoreList');
             prevScores.push(userScores);
             prevScores.sort(function(a,b){return a.pts - b.pts });
             prevScores.reverse();
@@ -285,7 +276,6 @@ function saveScore(event) {
     }
 
     userInput.value = '';
-    alert('Score saved');
 
     displayHighScore();
 }
@@ -315,7 +305,29 @@ function displayHighScore() {
         listEl.textContent = name + '  ' + points + '/25  ' + time + 'sec';
         list.append(listEl);
     }
+
+    var tempBox = document.createElement('div');
+    questionBox.append(tempBox);
+
+    var againBtn = document.createElement('button');
+    var clearBtn = document.createElement('button');
+    againBtn.textContent = 'Play Again';
+    clearBtn.textContent = "Clear Scores"
+    againBtn.setAttribute('id', 'temp-btn')
+    clearBtn.setAttribute('id', 'temp-btn')
+    tempBox.append(againBtn);
+    tempBox.append(clearBtn);
+
+    againBtn.addEventListener('click',function(){window.location.href = "./index.html";});
+
+    clearBtn.addEventListener('click',function() {
+        localStorage.removeItem('ScoreList');
+        alert('Score cleared!');
+    });
+
     return;
+
+
 }
 
 
